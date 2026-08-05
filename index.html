@@ -1114,6 +1114,345 @@ body { background: #efe6cd; color: #2e2b26; }
   font-weight: 700;
   box-shadow: 0 3px 8px rgba(35,64,48,0.25);
 }
+
+/* ===== Design System V35: Premium Buttons (.cc-btn-*) =====
+   Camada aditiva sobre o componente .cc-btn já existente.
+   Não remove nem substitui regras anteriores — apenas acrescenta
+   as variantes oficiais do Design System. */
+.cc-btn-primary, .cc-btn-secondary, .cc-btn-success,
+.cc-btn-warning, .cc-btn-danger, .cc-btn-ghost {
+  min-height: 48px;
+  border-radius: var(--r-md);
+  padding: 12px 20px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1.15;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease, background 0.15s ease;
+  transform: translateY(0) scale(1);
+}
+.cc-btn-primary:hover, .cc-btn-secondary:hover, .cc-btn-success:hover,
+.cc-btn-warning:hover, .cc-btn-danger:hover, .cc-btn-ghost:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 10px rgba(46,43,38,0.14);
+  transform: translateY(-1px);
+}
+.cc-btn-primary:active, .cc-btn-secondary:active, .cc-btn-success:active,
+.cc-btn-warning:active, .cc-btn-danger:active, .cc-btn-ghost:active {
+  transform: scale(0.985);
+  box-shadow: none;
+  filter: brightness(0.99);
+}
+.cc-btn-primary:focus-visible, .cc-btn-secondary:focus-visible, .cc-btn-success:focus-visible,
+.cc-btn-warning:focus-visible, .cc-btn-danger:focus-visible, .cc-btn-ghost:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+.cc-btn-primary {
+  background: linear-gradient(180deg, var(--pine) 0%, var(--pine-dark) 100%);
+  color: #fdf9ec;
+  border: 1.5px solid var(--pine-dark);
+}
+.cc-btn-secondary {
+  background: var(--paper-card);
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+.cc-btn-success {
+  background: var(--pine);
+  color: #fdf9ec;
+  border: 1.5px solid var(--pine-dark);
+}
+.cc-btn-warning {
+  background: var(--gold);
+  color: #3a2c12;
+  border: 1.5px solid #a87e28;
+}
+.cc-btn-danger {
+  background: var(--rust-soft);
+  color: var(--rust);
+  border: 1.5px solid var(--rust);
+}
+.cc-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid transparent;
+  box-shadow: none;
+}
+.cc-btn-ghost:hover { background: var(--line-soft); box-shadow: none; }
+.cc-btn-disabled,
+.cc-btn-primary:disabled, .cc-btn-secondary:disabled, .cc-btn-success:disabled,
+.cc-btn-warning:disabled, .cc-btn-danger:disabled, .cc-btn-ghost:disabled,
+.cc-btn-primary[disabled], .cc-btn-secondary[disabled], .cc-btn-success[disabled],
+.cc-btn-warning[disabled], .cc-btn-danger[disabled], .cc-btn-ghost[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  filter: none;
+}
+
+/* ===== Design System V36: Premium Cards (.cc-card) =====
+   Camada aditiva sobre os containers de cartão já existentes.
+   Não remove nem substitui regras anteriores dos componentes
+   (.cc-mission-card, .cc-room-card, etc.) — apenas padroniza
+   visualmente a base comum. */
+.cc-card {
+  background: #fffbf1;
+  color: #2e2b26;
+  border: 1px solid rgba(46, 43, 38, 0.10);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow:
+    0 2px 4px rgba(35, 64, 48, 0.05),
+    0 10px 24px rgba(35, 64, 48, 0.08);
+  min-width: 0;
+  position: relative;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+/* Variantes — todas reutilizam .cc-card como base */
+.cc-card-flat {
+  box-shadow: none;
+  border: 1px solid rgba(46, 43, 38, 0.14);
+}
+.cc-card-raised {
+  box-shadow:
+    0 4px 8px rgba(35, 64, 48, 0.07),
+    0 14px 30px rgba(35, 64, 48, 0.10);
+}
+.cc-card-interactive { cursor: pointer; }
+.cc-card-interactive:hover {
+  box-shadow:
+    0 4px 10px rgba(35, 64, 48, 0.08),
+    0 14px 28px rgba(35, 64, 48, 0.12);
+  border-color: rgba(61, 90, 69, 0.35);
+  transform: translateY(-2px);
+}
+.cc-card-interactive:active {
+  transform: translateY(1px) scale(0.995);
+  box-shadow: 0 2px 4px rgba(35, 64, 48, 0.06);
+}
+.cc-card-interactive:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+.cc-card-success {
+  background: rgba(61, 90, 69, 0.07);
+  border-color: rgba(61, 90, 69, 0.28);
+  color: var(--pine-dark);
+}
+.cc-card-warning {
+  background: rgba(201, 154, 59, 0.10);
+  border-color: rgba(201, 154, 59, 0.35);
+}
+.cc-card-danger {
+  background: rgba(168, 85, 45, 0.08);
+  border-color: rgba(168, 85, 45, 0.30);
+}
+.cc-card-muted {
+  background: rgba(46, 43, 38, 0.035);
+  border-color: rgba(46, 43, 38, 0.12);
+  color: #55524c;
+  box-shadow: none;
+}
+.cc-card-highlight {
+  border-color: rgba(61, 90, 69, 0.30);
+  box-shadow:
+    0 4px 10px rgba(35, 64, 48, 0.10),
+    0 16px 32px rgba(35, 64, 48, 0.14);
+}
+
+@media (max-width: 640px) {
+  .cc-card {
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 2px 3px rgba(35, 64, 48, 0.05), 0 6px 14px rgba(35, 64, 48, 0.07);
+  }
+  .cc-card-highlight {
+    box-shadow: 0 3px 6px rgba(35, 64, 48, 0.08), 0 8px 18px rgba(35, 64, 48, 0.10);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-card, .cc-card-interactive {
+    transition: none;
+  }
+  .cc-card-interactive:hover, .cc-card-interactive:active {
+    transform: none;
+  }
+}
+
+/* ===== Design System V37: Calendário Premium (.cc-calendar-day) =====
+   Camada aditiva sobre as células já existentes (.cc-cal-cell). Não
+   altera computeDayStatus, scheduledCabins, selectedDate nem a lógica
+   de bloqueio/preview — apenas moderniza a aparência, estilo Airbnb. */
+.cc-calendar-day {
+  border-radius: 16px;
+  border: 1px solid rgba(46,43,38,0.10);
+  background: #fffbf1;
+  box-shadow: 0 1px 0 rgba(46,43,38,0.05);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+  position: relative;
+}
+.cc-calendar-day:hover { border-color: rgba(61,90,69,0.35); box-shadow: 0 3px 8px rgba(35,64,48,0.10); }
+@media (hover: none) { .cc-calendar-day:hover { box-shadow: 0 1px 0 rgba(46,43,38,0.05); border-color: rgba(46,43,38,0.10); } }
+.cc-calendar-day:active { transform: translateY(1px); }
+.cc-calendar-day:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
+
+.cc-calendar-badge {
+  position: absolute; top: 4px; right: 4px;
+  font-size: 7.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+  padding: 1px 5px; border-radius: var(--r-pill); line-height: 1.4;
+}
+.cc-calendar-badge-today { background: var(--pine); color: #fff; }
+.cc-calendar-badge-readonly { background: rgba(59,110,168,0.14); color: rgb(59,110,168); }
+
+/* Hoje — destaque principal, visível sob luz externa */
+.cc-calendar-day-today {
+  border: 2px solid var(--pine-dark);
+  background: var(--pine-soft, #eaf2ea);
+}
+.cc-calendar-day-today .cc-cal-daynum { color: var(--pine-dark); }
+
+/* Amanhã somente leitura — nunca parece bloqueado */
+.cc-calendar-day-readonly {
+  border: 1px dashed rgb(59,110,168);
+  background: rgba(59,110,168,0.07);
+  opacity: 1;
+}
+
+/* Concluído */
+.cc-calendar-day-completed { background: rgba(61,90,69,0.12); border-color: rgba(61,90,69,0.28); }
+/* Incompleto / pendente */
+.cc-calendar-day-pending { background: rgba(168,85,45,0.08); border-color: rgba(168,85,45,0.22); }
+/* Folga */
+.cc-calendar-day-dayoff { background: rgba(138,154,91,0.16); border-color: rgba(138,154,91,0.30); }
+/* Sem limpeza */
+.cc-calendar-day-no-cleaning { background: rgba(46,43,38,0.05); border-color: rgba(46,43,38,0.14); }
+/* Ausência justificada */
+.cc-calendar-day-absence-justified { background: rgba(201,154,59,0.14); border-color: rgba(201,154,59,0.32); }
+/* Ausência não justificada */
+.cc-calendar-day-absence-unjustified { background: rgba(168,85,45,0.14); border-color: rgba(168,85,45,0.32); }
+
+/* Datas futuras bloqueadas (após amanhã) */
+.cc-calendar-day-future.cc-calendar-day-locked {
+  background: rgba(46,43,38,0.035);
+  border-color: rgba(46,43,38,0.10);
+  opacity: 1;
+}
+.cc-calendar-day-future.cc-calendar-day-locked .cc-cal-daynum { opacity: 0.85; }
+
+/* Hoje selecionado (dia atual aberto para consulta/registro) — combina sem sobrepor */
+.cc-calendar-day-today.cc-calendar-day-selected {
+  box-shadow: 0 0 0 3px var(--gold-soft, #fbf1da), 0 0 0 5px var(--gold);
+}
+.cc-calendar-day-selected:not(.cc-calendar-day-today) {
+  border-width: 2px;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-soft, #fbf1da);
+}
+
+@media (max-width: 640px) {
+  .cc-calendar-day { border-radius: 14px; }
+  /* Em telas pequenas o ícone central (olho/pin) já comunica o estado;
+     o selo textual é ocultado para nunca sobrepor número, ícone ou dot. */
+  .cc-calendar-badge { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-calendar-day { transition: none; }
+  .cc-calendar-day:active { transform: none; }
+}
+
+/* ===== Design System V38: Checklist Premium (.cc-checklist-item) =====
+   Camada aditiva sobre a linha de tarefa já existente (.cc-item), o
+   checkbox (.cc-check) e o botão de dano (.cc-damage-btn). Não altera
+   IDs, eventos, persistência ou regras de conclusão/dano/foto. */
+.cc-checklist-item {
+  background: #fffbf1;
+  border: 1px solid rgba(46,43,38,0.10);
+  border-radius: 15px;
+  padding: 11px 13px;
+  gap: 12px;
+  box-shadow: 0 1px 0 rgba(46,43,38,0.04);
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.cc-checklist-item:hover { background: #fff; border-color: rgba(61,90,69,0.30); }
+.cc-checklist-item-pending { background: #fffbf1; }
+.cc-checklist-item-completed {
+  background: rgba(61,90,69,0.09);
+  border-color: rgba(61,90,69,0.26);
+}
+.cc-checklist-item-completed .cc-checklist-item-label { opacity: 0.72; }
+.cc-checklist-item.has-damage.cc-checklist-item-damaged {
+  background: rgba(168,85,45,0.08);
+  border: 1.5px solid rgba(168,85,45,0.32);
+  padding-left: 13px;
+}
+.cc-checklist-item-readonly { background: rgba(46,43,38,0.035); }
+
+/* Checkbox premium — mantém .cc-check original, apenas amplia a área de toque
+   e refina o visual via ::before (não captura clique separadamente: o hit-test
+   permanece no próprio elemento .cc-check). */
+.cc-checklist-check {
+  width: 22px; height: 22px; border-radius: 6px;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+}
+.cc-checklist-check::before {
+  content: ''; position: absolute; inset: -11px; /* ~44px de área de toque total */
+}
+.cc-check.cc-checklist-check.done::after {
+  left: 6px; top: 2px; width: 7px; height: 12px;
+}
+.cc-checklist-check:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.cc-checklist-check-disabled { cursor: not-allowed; }
+
+.cc-checklist-item-label {
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cc-checklist-damage-btn {
+  min-height: 34px;
+}
+.cc-checklist-damage-btn.cc-btn-danger {
+  min-height: 40px;
+  font-weight: 700;
+}
+.cc-checklist-damage-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.cc-checklist-item-del {
+  min-width: 28px; min-height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* Cabeçalho do cômodo e progresso — só ajustes visuais, sem alterar cálculo */
+.cc-checklist-room-head { flex-wrap: wrap; row-gap: 6px; }
+.cc-checklist-progress .cc-progress-track { height: 12px; border-radius: 8px; }
+.cc-checklist-progress .cc-progress-fill { border-radius: 8px; }
+
+@media (max-width: 640px) {
+  .cc-checklist-item { border-radius: 14px; padding: 10px 11px; }
+  .cc-room-view-title { font-size: 21px; }
+  .cc-room-view-icon { width: 38px; height: 38px; }
+  .cc-checklist-damage-btn { width: 100%; justify-content: center; margin-left: 0 !important; }
+}
+
+@media (hover: none) {
+  .cc-checklist-item:hover { background: inherit; border-color: rgba(46,43,38,0.10); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-checklist-item, .cc-checklist-check { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -1153,9 +1492,9 @@ body { background: #efe6cd; color: #2e2b26; }
     <input type="file" accept="image/*" multiple id="ccUploadInput" style="display:none" />
     <div class="cc-photo-thumbs" id="ccPhotoThumbs"></div>
     <div class="cc-modal-actions">
-      <button class="cc-btn" id="ccDamageClearBtn">Remover marcação</button>
-      <button class="cc-btn" id="ccDamageCancelBtn">Cancelar</button>
-      <button class="cc-btn cc-primary" id="ccDamageSaveBtn">Salvar</button>
+      <button class="cc-btn cc-btn-warning" id="ccDamageClearBtn">Remover marcação</button>
+      <button class="cc-btn cc-btn-secondary" id="ccDamageCancelBtn">Cancelar</button>
+      <button class="cc-btn cc-btn-primary cc-primary" id="ccDamageSaveBtn">Salvar</button>
     </div>
   </div>
 </div>
@@ -1195,8 +1534,8 @@ body { background: #efe6cd; color: #2e2b26; }
     <input type="password" id="ccPasswordInput" placeholder="Senha master" />
     <div class="cc-modal-error" id="ccPasswordError">Senha incorreta. Tente novamente.</div>
     <div class="cc-modal-actions">
-      <button class="cc-btn" id="ccPasswordCancelBtn">Cancelar</button>
-      <button class="cc-btn cc-primary" id="ccPasswordConfirmBtn">Confirmar</button>
+      <button class="cc-btn cc-btn-secondary" id="ccPasswordCancelBtn">Cancelar</button>
+      <button class="cc-btn cc-btn-primary cc-primary" id="ccPasswordConfirmBtn">Confirmar</button>
     </div>
   </div>
 </div>
@@ -1207,13 +1546,13 @@ body { background: #efe6cd; color: #2e2b26; }
     <div class="cc-day-complete-title">Dia concluído</div>
     <div class="cc-day-complete-sub" id="ccDayCompleteSub"></div>
     <div class="cc-day-complete-stats">
-      <div class="cc-day-complete-stat"><div class="cc-day-complete-stat-label">Cabanas finalizadas</div><div class="cc-day-complete-stat-value" id="ccDayCompleteCabins"></div></div>
-      <div class="cc-day-complete-stat"><div class="cc-day-complete-stat-label">Tempo total</div><div class="cc-day-complete-stat-value" id="ccDayCompleteTime"></div></div>
-      <div class="cc-day-complete-stat"><div class="cc-day-complete-stat-label">Meta mensal</div><div class="cc-day-complete-stat-value" id="ccDayCompleteGoal"></div></div>
-      <div class="cc-day-complete-stat"><div class="cc-day-complete-stat-label">Sequência atual</div><div class="cc-day-complete-stat-value" id="ccDayCompleteStreak"></div></div>
+      <div class="cc-day-complete-stat cc-card cc-card-flat"><div class="cc-day-complete-stat-label">Cabanas finalizadas</div><div class="cc-day-complete-stat-value" id="ccDayCompleteCabins"></div></div>
+      <div class="cc-day-complete-stat cc-card cc-card-flat"><div class="cc-day-complete-stat-label">Tempo total</div><div class="cc-day-complete-stat-value" id="ccDayCompleteTime"></div></div>
+      <div class="cc-day-complete-stat cc-card cc-card-flat"><div class="cc-day-complete-stat-label">Meta mensal</div><div class="cc-day-complete-stat-value" id="ccDayCompleteGoal"></div></div>
+      <div class="cc-day-complete-stat cc-card cc-card-flat"><div class="cc-day-complete-stat-label">Sequência atual</div><div class="cc-day-complete-stat-value" id="ccDayCompleteStreak"></div></div>
     </div>
     <div class="cc-day-complete-time-list" id="ccDayCompleteTimeList"></div>
-    <button class="cc-btn cc-primary" id="ccDayCompleteBackBtn">Voltar ao calendário</button>
+    <button class="cc-btn cc-btn-primary cc-primary" id="ccDayCompleteBackBtn">Voltar ao calendário</button>
   </div>
 </div>
 
@@ -1224,7 +1563,7 @@ body { background: #efe6cd; color: #2e2b26; }
     <div class="cc-achievement-name" id="ccAchievementName"></div>
     <div class="cc-day-complete-sub" id="ccAchievementDesc"></div>
     <div class="cc-mission-msg cc-achievement-congrats">Parabéns pelo desempenho! Continue assim.</div>
-    <button class="cc-btn cc-primary" id="ccAchievementContinueBtn">Continuar</button>
+    <button class="cc-btn cc-btn-primary cc-primary" id="ccAchievementContinueBtn">Continuar</button>
   </div>
 </div>
 
@@ -1241,6 +1580,22 @@ body { background: #efe6cd; color: #2e2b26; }
     <button type="button" class="cc-admin-panel-close" id="ccAdminPanelCloseBtn">✕</button>
     <div class="cc-modal-header"><div class="cc-modal-title cc-mono">📊 Dashboard Gerencial</div></div>
     <div id="ccAdminPanelBody"></div>
+  </div>
+</div>
+
+<div class="cc-modal-overlay hidden" id="ccAnalyticsOverlay">
+  <div class="cc-modal cc-admin-panel">
+    <button type="button" class="cc-admin-panel-close" id="ccAnalyticsCloseBtn">✕</button>
+    <div class="cc-modal-header"><div class="cc-modal-title cc-mono">📈 Analytics Operacional</div></div>
+    <div id="ccAnalyticsBody" style="max-height: 70vh; overflow-y: auto; padding: 0 26px;"></div>
+  </div>
+</div>
+
+<div class="cc-modal-overlay hidden" id="ccPlanningOverlay">
+  <div class="cc-modal cc-admin-panel">
+    <button type="button" class="cc-admin-panel-close" id="ccPlanningCloseBtn">✕</button>
+    <div class="cc-modal-header"><div class="cc-modal-title cc-mono">📅 Central de Planejamento</div></div>
+    <div id="ccPlanningBody" style="max-height: 70vh; overflow-y: auto; padding: 0 26px;"></div>
   </div>
 </div>
 
@@ -1264,10 +1619,10 @@ body { background: #efe6cd; color: #2e2b26; }
   <div class="cc-modal">
     <div class="cc-modal-header"><div class="cc-modal-title cc-mono">Restaurar backup</div></div>
     <div class="cc-modal-item">Restaurar este backup substituirá todos os dados deste aparelho. Deseja continuar?</div>
-    <div class="cc-admin-backup-summary" id="ccBackupSummary"></div>
+    <div class="cc-admin-backup-summary cc-card cc-card-flat" id="ccBackupSummary"></div>
     <div class="cc-modal-actions">
-      <button type="button" class="cc-btn" id="ccBackupCancelBtn">Cancelar</button>
-      <button type="button" class="cc-btn cc-primary" id="ccBackupConfirmBtn">Restaurar backup</button>
+      <button type="button" class="cc-btn cc-btn-secondary" id="ccBackupCancelBtn">Cancelar</button>
+      <button type="button" class="cc-btn cc-btn-primary cc-primary" id="ccBackupConfirmBtn">Restaurar backup</button>
     </div>
   </div>
 </div>
@@ -1288,7 +1643,7 @@ body { background: #efe6cd; color: #2e2b26; }
   const CONFIG = {
     sistema: {
       nome: 'Diário de Limpeza das Cabanas',
-      versao: 'v30',
+      versao: 'v41',
       empresa: '',
       propriedade: '',
       marcaTitulo: 'Diário&nbsp;de Limpeza',
@@ -2363,7 +2718,7 @@ body { background: #efe6cd; color: #2e2b26; }
       const unlocked = !!rec;
       const dateLabel = unlocked ? new Date(rec.unlockedAt).toLocaleString('pt-BR') : '';
       return `
-        <div class="cc-ach-card${unlocked ? '' : ' locked'}">
+        <div class="cc-ach-card cc-card ${unlocked ? 'cc-card-success' : 'cc-card-muted locked'}">
           <div class="cc-ach-card-icon">${unlocked ? a.icon : '🔒'}</div>
           <div>
             <div class="cc-ach-card-name">${escapeHtml(a.nome)}</div>
@@ -2759,6 +3114,10 @@ body { background: #efe6cd; color: #2e2b26; }
 
   const adminPanelOverlay = document.getElementById('ccAdminPanelOverlay');
   const adminPanelBody = document.getElementById('ccAdminPanelBody');
+  const analyticsOverlay = document.getElementById('ccAnalyticsOverlay');
+  const analyticsBody = document.getElementById('ccAnalyticsBody');
+  const planningOverlay = document.getElementById('ccPlanningOverlay');
+  const planningBody = document.getElementById('ccPlanningBody');
 
   // ---- Dashboard Gerencial: estado do filtro de período (persiste entre renders) ----
   const dashState = { mode: 'este_mes', customStart: '', customEnd: '', historyVisible: 31, sortCol: 'limpezas', sortDir: 'desc', error: '' };
@@ -2975,7 +3334,7 @@ body { background: #efe6cd; color: #2e2b26; }
     if (!adminPanelOverlay || adminPanelOverlay.classList.contains('hidden')) return;
     if (!adminMode) { closeAdminPanel(); return; } // defesa em profundidade: nunca exibe fora do modo administrativo
     const s = computeAdminStats();
-    const card = (label, value) => `<div class="cc-admin-card"><div class="cc-admin-card-label">${label}</div><div class="cc-admin-card-value cc-mono">${value}</div></div>`;
+    const card = (label, value) => `<div class="cc-admin-card cc-card cc-card-flat"><div class="cc-admin-card-label">${label}</div><div class="cc-admin-card-value cc-mono">${value}</div></div>`;
 
     dashState.error = dashState.mode === 'personalizado' ? validateCustomPeriod(dashState.customStart, dashState.customEnd) : '';
     const periodInvalid = !!dashState.error;
@@ -3102,7 +3461,7 @@ body { background: #efe6cd; color: #2e2b26; }
             <td>${formatDuration(d.tempoTotal)}</td>
           </tr>`).join('')}</tbody>
         </table></div>
-        ${p.days.length > dashState.historyVisible ? `<div class="cc-dash-showmore-wrap"><button type="button" class="cc-btn" id="ccDashShowMoreBtn">Mostrar mais</button></div>` : ''}
+        ${p.days.length > dashState.historyVisible ? `<div class="cc-dash-showmore-wrap"><button type="button" class="cc-btn cc-btn-secondary" id="ccDashShowMoreBtn">Mostrar mais</button></div>` : ''}
         ` : `<div class="cc-dash-empty">Nenhum dia com registro operacional neste período.</div>`}
       </div>
     `;
@@ -3123,7 +3482,7 @@ body { background: #efe6cd; color: #2e2b26; }
     const exportSection = `
       <div class="cc-admin-panel-section">
         <div class="cc-admin-panel-section-title cc-mono">Relatório</div>
-        <button type="button" class="cc-btn cc-primary" id="ccDashExportPdfBtn" ${periodInvalid ? 'disabled aria-disabled="true"' : ''}>Exportar relatório em PDF</button>
+        <button type="button" class="cc-btn cc-btn-primary cc-primary" id="ccDashExportPdfBtn" ${periodInvalid ? 'disabled aria-disabled="true"' : ''}>Exportar relatório em PDF</button>
       </div>
     `;
 
@@ -3131,8 +3490,8 @@ body { background: #efe6cd; color: #2e2b26; }
       <div class="cc-admin-panel-section">
         <div class="cc-admin-panel-section-title cc-mono">Backup e restauração</div>
         <div class="cc-admin-backup-actions">
-          <button type="button" class="cc-btn cc-primary" id="ccBackupExportBtn" ${isRestoringBackup ? 'disabled' : ''}>Exportar backup</button>
-          <button type="button" class="cc-btn" id="ccBackupImportBtn" ${isRestoringBackup ? 'disabled' : ''}>Importar backup</button>
+          <button type="button" class="cc-btn cc-btn-primary cc-primary" id="ccBackupExportBtn" ${isRestoringBackup ? 'disabled' : ''}>Exportar backup</button>
+          <button type="button" class="cc-btn cc-btn-secondary" id="ccBackupImportBtn" ${isRestoringBackup ? 'disabled' : ''}>Importar backup</button>
           <input type="file" accept="application/json,.json" id="ccBackupFileInput" class="cc-hidden-file-input" />
         </div>
         <div class="cc-admin-backup-msg" id="ccBackupMsg"></div>
@@ -3211,11 +3570,310 @@ body { background: #efe6cd; color: #2e2b26; }
     if (importBtn && fileInput) importBtn.addEventListener('click', () => fileInput.click());
     if (fileInput) fileInput.addEventListener('change', handleBackupFileSelected);
   }
+
+  // ---- Analytics Operacional ----
+  function calculateAnalytics() {
+    const analytics = {
+      tempoMedioPorCabana: {},
+      rankingRapidas: [],
+      rankingDemoradas: [],
+      tempoMedioPorComodo: {},
+      ocorrenciasPorCabana: {},
+      danosPorComodo: {},
+      diasPerfeitos: 0,
+      historicoMeta: [],
+      tendenciaSemanal: []
+    };
+
+    const stats = readState();
+    if (!stats || !stats.cabanas || Object.keys(stats.cabanas).length === 0) {
+      return null;
+    }
+
+    let totalDiasPerfeitos = 0;
+    const temposCabana = {};
+    const temposComodo = {};
+    const ocorrCabana = {};
+    const danosCabana = {};
+
+    Object.entries(stats.cabanas).forEach(([cabanId, caban]) => {
+      if (!caban.dias) return;
+      temposCabana[caban.nome] = [];
+      ocorrCabana[caban.nome] = 0;
+      danosCabana[caban.nome] = {};
+
+      Object.entries(caban.dias).forEach(([dateStr, dia]) => {
+        if (!dia.comodos) return;
+        let tempoTotalDia = 0;
+        let danosDia = 0;
+
+        Object.entries(dia.comodos).forEach(([comodoId, comodo]) => {
+          const nomeComodo = ROOMS.find(r => r.id === comodoId)?.nome || comodoId;
+          if (!temposComodo[nomeComodo]) temposComodo[nomeComodo] = [];
+          if (!danosCabana[caban.nome][nomeComodo]) danosCabana[caban.nome][nomeComodo] = 0;
+
+          if (comodo.duracao > 0) {
+            tempoTotalDia += comodo.duracao;
+            temposComodo[nomeComodo].push(comodo.duracao);
+            temposCabana[caban.nome].push(comodo.duracao);
+          }
+
+          if (comodo.danos && comodo.danos.length > 0) {
+            danosCabana[caban.nome][nomeComodo] += comodo.danos.length;
+            danosDia += comodo.danos.length;
+          }
+        });
+
+        if (dia.comodos && Object.keys(dia.comodos).length > 0 && danosDia === 0) {
+          totalDiasPerfeitos++;
+        }
+
+        if (dia.ocorrencias && dia.ocorrencias.length > 0) {
+          ocorrCabana[caban.nome] += dia.ocorrencias.length;
+        }
+      });
+    });
+
+    analytics.diasPerfeitos = totalDiasPerfeitos;
+
+    Object.entries(temposCabana).forEach(([nome, tempos]) => {
+      if (tempos.length > 0) {
+        analytics.tempoMedioPorCabana[nome] = Math.round(tempos.reduce((a, b) => a + b, 0) / tempos.length);
+      }
+    });
+
+    Object.entries(temposComodo).forEach(([nome, tempos]) => {
+      if (tempos.length > 0) {
+        analytics.tempoMedioPorComodo[nome] = Math.round(tempos.reduce((a, b) => a + b, 0) / tempos.length);
+      }
+    });
+
+    analytics.rankingRapidas = Object.entries(analytics.tempoMedioPorCabana)
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, 5)
+      .map(([nome, tempo]) => ({ nome, tempo }));
+
+    analytics.rankingDemoradas = Object.entries(analytics.tempoMedioPorCabana)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([nome, tempo]) => ({ nome, tempo }));
+
+    analytics.ocorrenciasPorCabana = ocorrCabana;
+
+    Object.entries(danosCabana).forEach(([cabana, comodos]) => {
+      Object.entries(comodos).forEach(([comodo, qtd]) => {
+        if (!analytics.danosPorComodo[comodo]) analytics.danosPorComodo[comodo] = 0;
+        analytics.danosPorComodo[comodo] += qtd;
+      });
+    });
+
+    return analytics;
+  }
+
+  function renderAnalytics() {
+    const analytics = calculateAnalytics();
+    if (!analytics) {
+      analyticsBody.innerHTML = '<div class="cc-card cc-card-flat" style="margin: 20px 0; padding: 18px; text-align: center;">Sem dados suficientes</div>';
+      return;
+    }
+
+    let html = '<div style="padding: 20px 0;">';
+
+    html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px;">';
+    html += `<div class="cc-card cc-card-flat"><div style="font-size: 28px; font-weight: bold; color: var(--pine);">${analytics.diasPerfeitos}</div><div style="font-size: 12px; color: #666;">Dias perfeitos</div></div>`;
+    html += `<div class="cc-card cc-card-flat"><div style="font-size: 18px; font-weight: bold;">Tempo médio</div><div style="font-size: 12px; color: #666;">por cabana</div></div>`;
+    html += '</div>';
+
+    if (Object.keys(analytics.tempoMedioPorCabana).length > 0) {
+      html += '<div class="cc-card cc-card-flat" style="margin-bottom: 18px;"><div style="font-weight: bold; margin-bottom: 12px;">⚡ Mais rápidas</div>';
+      analytics.rankingRapidas.forEach(r => {
+        html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft);">${r.nome}<strong>${r.tempo}min</strong></div>`;
+      });
+      html += '</div>';
+    }
+
+    if (Object.keys(analytics.tempoMedioPorCabana).length > 0) {
+      html += '<div class="cc-card cc-card-flat" style="margin-bottom: 18px;"><div style="font-weight: bold; margin-bottom: 12px;">🐢 Mais demoradas</div>';
+      analytics.rankingDemoradas.forEach(r => {
+        html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft);">${r.nome}<strong>${r.tempo}min</strong></div>`;
+      });
+      html += '</div>';
+    }
+
+    if (Object.keys(analytics.tempoMedioPorComodo).length > 0) {
+      html += '<div class="cc-card cc-card-flat" style="margin-bottom: 18px;"><div style="font-weight: bold; margin-bottom: 12px;">Tempo médio por cômodo</div>';
+      Object.entries(analytics.tempoMedioPorComodo).forEach(([comodo, tempo]) => {
+        html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft);">${comodo}<strong>${tempo}min</strong></div>`;
+      });
+      html += '</div>';
+    }
+
+    if (Object.keys(analytics.ocorrenciasPorCabana).length > 0) {
+      html += '<div class="cc-card cc-card-flat" style="margin-bottom: 18px;"><div style="font-weight: bold; margin-bottom: 12px;">Ocorrências por cabana</div>';
+      Object.entries(analytics.ocorrenciasPorCabana).sort((a, b) => b[1] - a[1]).forEach(([cabana, qtd]) => {
+        if (qtd > 0) html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft);">${cabana}<strong style="color: var(--rust);">${qtd}</strong></div>`;
+      });
+      html += '</div>';
+    }
+
+    if (Object.keys(analytics.danosPorComodo).length > 0) {
+      html += '<div class="cc-card cc-card-flat" style="margin-bottom: 18px;"><div style="font-weight: bold; margin-bottom: 12px;">Danos por cômodo</div>';
+      Object.entries(analytics.danosPorComodo).sort((a, b) => b[1] - a[1]).forEach(([comodo, qtd]) => {
+        if (qtd > 0) html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft);">${comodo}<strong style="color: var(--rust);">${qtd}</strong></div>`;
+      });
+      html += '</div>';
+    }
+
+    html += '</div>';
+    analyticsBody.innerHTML = html;
+  }
+
+  function closeAnalytics() { if (analyticsOverlay) analyticsOverlay.classList.add('hidden'); }
+  function openAnalytics() { if (!analyticsOverlay || !adminMode) return; analyticsOverlay.classList.remove('hidden'); renderAnalytics(); }
+
+  // ---- Central de Planejamento ----
+  function calculatePlanning() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+    const stats = readState();
+    if (!stats || !stats.cabanas) return null;
+
+    const schedule = stats.schedule || {};
+    const scheduledCabanas = [];
+    const stats_hist = {};
+
+    Object.entries(stats.cabanas).forEach(([cabanId, caban]) => {
+      if (!caban.dias) return;
+      let totalDuracao = 0;
+      let totalRegistros = 0;
+
+      Object.entries(caban.dias).forEach(([dateStr, dia]) => {
+        if (!dia.comodos) return;
+        Object.entries(dia.comodos).forEach(([comodoId, comodo]) => {
+          if (comodo.duracao > 0) {
+            totalDuracao += comodo.duracao;
+            totalRegistros++;
+          }
+        });
+      });
+
+      if (totalRegistros > 0) {
+        stats_hist[caban.nome] = Math.round(totalDuracao / totalRegistros);
+      }
+    });
+
+    Object.entries(schedule).forEach(([date, cabanas]) => {
+      if (date === tomorrowStr && cabanas && cabanas.length > 0) {
+        cabanas.forEach(cabanId => {
+          const caban = Object.values(stats.cabanas || {}).find(c => {
+            const key = Object.keys(stats.cabanas).find(k => stats.cabanas[k] === c);
+            return key === cabanId;
+          });
+          if (caban) {
+            const tempoMedio = stats_hist[caban.nome] || 0;
+            scheduledCabanas.push({ id: cabanId, nome: caban.nome, tempoMedio });
+          }
+        });
+      }
+    });
+
+    if (scheduledCabanas.length === 0) return null;
+
+    let totalComodos = 0;
+    let totalTempo = 0;
+    scheduledCabanas.forEach(c => {
+      totalTempo += c.tempoMedio;
+      totalComodos += 3;
+    });
+
+    let carga = 'Média';
+    let recomendacao = 'Planejamento normal.';
+
+    if (totalTempo < 60) {
+      carga = 'Muito Baixa';
+      recomendacao = 'Planejamento confortável.';
+    } else if (totalTempo < 120) {
+      carga = 'Baixa';
+      recomendacao = 'Planejamento confortável.';
+    } else if (totalTempo < 240) {
+      carga = 'Média';
+      recomendacao = 'Planejamento normal.';
+    } else if (totalTempo < 360) {
+      carga = 'Alta';
+      recomendacao = 'Recomenda-se iniciar cedo.';
+    } else {
+      carga = 'Muito Alta';
+      recomendacao = 'Alta carga prevista.';
+    }
+
+    return {
+      data: tomorrowStr,
+      quantidadeCabanas: scheduledCabanas.length,
+      cabanas: scheduledCabanas,
+      tempoTotal: totalTempo,
+      quantidadeComodos: totalComodos,
+      carga,
+      recomendacao
+    };
+  }
+
+  function renderPlanning() {
+    const planning = calculatePlanning();
+    if (!planning) {
+      planningBody.innerHTML = '<div class="cc-card cc-card-flat" style="margin: 20px 0; padding: 18px; text-align: center;">Sem dados suficientes para amanhã</div>';
+      return;
+    }
+
+    let html = '<div style="padding: 20px 0;">';
+
+    const cargoColor = planning.carga === 'Muito Alta' || planning.carga === 'Alta' ? 'var(--rust)' : 
+                       planning.carga === 'Média' ? 'var(--gold)' : 'var(--pine)';
+
+    html += `<div class="cc-card cc-card-highlight" style="margin-bottom: 18px;">
+      <div style="font-size: 14px; color: #666; margin-bottom: 8px;">Previsão para ${new Date(planning.data).toLocaleDateString('pt-BR')}</div>
+      <div style="font-size: 32px; font-weight: bold; color: ${cargoColor}; margin-bottom: 12px;">${planning.carga}</div>
+      <div style="font-size: 14px; color: #333; font-style: italic;">"${planning.recomendacao}"</div>
+      <div style="font-size: 12px; color: #999; margin-top: 12px;">As estimativas são baseadas no histórico registrado.</div>
+    </div>`;
+
+    html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px;">';
+    html += `<div class="cc-card cc-card-flat"><div style="font-size: 24px; font-weight: bold; color: var(--pine);">${planning.quantidadeCabanas}</div><div style="font-size: 12px; color: #666;">Cabanas</div></div>`;
+    html += `<div class="cc-card cc-card-flat"><div style="font-size: 24px; font-weight: bold; color: var(--gold);">${planning.tempoTotal}min</div><div style="font-size: 12px; color: #666;">Tempo total</div></div>`;
+    html += `<div class="cc-card cc-card-flat"><div style="font-size: 24px; font-weight: bold; color: var(--rust);">${planning.quantidadeComodos}</div><div style="font-size: 12px; color: #666;">Cômodos</div></div>`;
+    html += '</div>';
+
+    html += '<div class="cc-card cc-card-flat" style="margin-bottom: 18px;"><div style="font-weight: bold; margin-bottom: 12px;">Cabanas programadas</div>';
+    planning.cabanas.forEach(c => {
+      html += `<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line-soft);">
+        <div>${c.nome}</div>
+        <div style="font-size: 12px; color: #666;">${c.tempoMedio}min (média)</div>
+      </div>`;
+    });
+    html += '</div>';
+
+    html += '</div>';
+    planningBody.innerHTML = html;
+  }
+
+  function closePlanning() { if (planningOverlay) planningOverlay.classList.add('hidden'); }
+  function openPlanning() { if (!planningOverlay || !adminMode) return; planningOverlay.classList.remove('hidden'); renderPlanning(); }
+
   function closeAdminPanel() { if (adminPanelOverlay) adminPanelOverlay.classList.add('hidden'); }
   function openAdminPanel() { if (!adminPanelOverlay || !adminMode) return; adminPanelOverlay.classList.remove('hidden'); renderAdminPanel(); }
   const adminPanelCloseBtn = document.getElementById('ccAdminPanelCloseBtn');
   if (adminPanelCloseBtn) adminPanelCloseBtn.addEventListener('click', closeAdminPanel);
   if (adminPanelOverlay) adminPanelOverlay.addEventListener('click', e => { if (e.target === adminPanelOverlay) closeAdminPanel(); });
+
+  const analyticsCloseBtn = document.getElementById('ccAnalyticsCloseBtn');
+  if (analyticsCloseBtn) analyticsCloseBtn.addEventListener('click', closeAnalytics);
+  if (analyticsOverlay) analyticsOverlay.addEventListener('click', e => { if (e.target === analyticsOverlay) closeAnalytics(); });
+
+  const planningCloseBtn = document.getElementById('ccPlanningCloseBtn');
+  if (planningCloseBtn) planningCloseBtn.addEventListener('click', closePlanning);
+  if (planningOverlay) planningOverlay.addEventListener('click', e => { if (e.target === planningOverlay) closePlanning(); });
 
   // ---- Detalhamento do dia (somente leitura) ----
   const dayDetailOverlay = document.getElementById('ccDayDetailOverlay');
@@ -3686,6 +4344,16 @@ body { background: #efe6cd; color: #2e2b26; }
       panelBtn.textContent = '📊 Dashboard';
       panelBtn.addEventListener('click', openAdminPanel);
       adminControlsEl.appendChild(panelBtn);
+      const analyticsBtn = document.createElement('button');
+      analyticsBtn.className = 'cc-admin-btn';
+      analyticsBtn.textContent = '📈 Analytics';
+      analyticsBtn.addEventListener('click', openAnalytics);
+      adminControlsEl.appendChild(analyticsBtn);
+      const planningBtn = document.createElement('button');
+      planningBtn.className = 'cc-admin-btn';
+      planningBtn.textContent = '📅 Planejamento';
+      planningBtn.addEventListener('click', openPlanning);
+      adminControlsEl.appendChild(planningBtn);
       const exitBtn = document.createElement('button');
       exitBtn.className = 'cc-admin-btn cc-admin-active';
       exitBtn.textContent = 'Sair do modo administrativo';
@@ -3811,7 +4479,7 @@ body { background: #efe6cd; color: #2e2b26; }
         </div>` : ''}
       </div>
       <div class="cc-head-actions">
-        ${adminMode ? '<button class="cc-btn cc-danger" id="ccDeleteCabinBtn">Excluir cabana</button>' : ''}
+        ${adminMode ? '<button class="cc-btn cc-btn-danger cc-danger" id="ccDeleteCabinBtn">Excluir cabana</button>' : ''}
       </div>
     `;
     mainEl.appendChild(head);
@@ -3843,18 +4511,26 @@ body { background: #efe6cd; color: #2e2b26; }
       const status = computeDayStatus(dateStr);
       const openable = isDateOpenableNormally(dateStr);
       const cell = document.createElement('div');
-      let cls = 'cc-cal-cell';
-      if (dateStr === tStr) cls += ' today';
+      let cls = 'cc-cal-cell cc-calendar-day';
+      if (dateStr === tStr) cls += ' today cc-calendar-day-today';
       if (status !== 'futuro') cls += ` cc-day-status-${status}`;
+      if (status === 'concluido') cls += ' cc-calendar-day-completed';
+      else if (status === 'incompleto') cls += ' cc-calendar-day-pending';
+      else if (status === 'folga') cls += ' cc-calendar-day-dayoff';
+      else if (status === 'sem_limpeza') cls += ' cc-calendar-day-no-cleaning';
+      else if (status === 'ausencia_justificada') cls += ' cc-calendar-day-absence cc-calendar-day-absence-justified';
+      else if (status === 'ausencia_nao_justificada') cls += ' cc-calendar-day-absence cc-calendar-day-absence-unjustified';
       let dot = '';
       if (log && log.saved) dot = '<div class="cc-cal-dot saved"></div>';
       else if (log && Object.values(log.completions).some(c => c.done)) dot = '<div class="cc-cal-dot progress"></div>';
+      let badgeHtml = '';
       if (adminMode) {
         cls += ' cc-admin-pickable';
       } else if (!openable) {
-        if (isTomorrowPreview(dateStr)) cls += ' cc-day-preview';
-        else cls += ' cc-day-blocked';
+        if (isTomorrowPreview(dateStr)) { cls += ' cc-day-preview cc-calendar-day-readonly'; badgeHtml = '<span class="cc-calendar-badge cc-calendar-badge-readonly">Amanhã</span>'; }
+        else cls += ' cc-day-blocked cc-calendar-day-future cc-calendar-day-locked';
       }
+      if (dateStr === tStr && (adminMode || openable)) badgeHtml = '<span class="cc-calendar-badge cc-calendar-badge-today">Hoje</span>';
       cell.className = cls;
       const disp = STATUS_DISPLAY[status];
       let iconHtml = '';
@@ -3869,7 +4545,7 @@ body { background: #efe6cd; color: #2e2b26; }
         iconHtml = `<span class="cc-cal-icon-wrap" style="color: rgb(${disp.color})">${(ICONS[disp.icon] || '').replace('<svg ', '<svg class="cc-cal-icon" ')}</span>`;
         labelHtml = `<span class="cc-cal-label">${disp.label}</span>`;
       }
-      cell.innerHTML = `<span class="cc-cal-daynum">${d}</span>${iconHtml}${labelHtml}${dot}`;
+      cell.innerHTML = `<span class="cc-cal-daynum">${d}</span>${iconHtml}${labelHtml}${dot}${badgeHtml}`;
       if (adminMode) {
         cell.addEventListener('click', () => openScheduleModal(dateStr));
       } else if (openable || isTomorrowPreview(dateStr)) {
@@ -3900,7 +4576,7 @@ body { background: #efe6cd; color: #2e2b26; }
     const pctGeralHoje = tasked.length > 0 ? Math.round(tasked.reduce((s, c) => s + dayProgress(c, tStrToday), 0) / tasked.length) : 0;
     const todayOpStatus = computeDayStatus(tStrToday);
     const missionCard = document.createElement('div');
-    missionCard.className = 'cc-mission-card';
+    missionCard.className = 'cc-mission-card cc-card cc-card-highlight';
     missionCard.innerHTML = `
       <div class="cc-mission-title">Missão de hoje</div>
       <div class="cc-mission-grid">
@@ -3917,7 +4593,7 @@ body { background: #efe6cd; color: #2e2b26; }
     const nowRT2 = new Date();
     const goal = computeMonthlyGoal(nowRT2.getFullYear(), nowRT2.getMonth());
     const goalCard = document.createElement('div');
-    goalCard.className = 'cc-goal-card';
+    goalCard.className = 'cc-goal-card cc-card cc-card-highlight';
     const goalMonthLabel = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(nowRT2);
     const barPct = Math.max(0, Math.min(100, goal.percentual));
     goalCard.innerHTML = `
@@ -3967,11 +4643,11 @@ body { background: #efe6cd; color: #2e2b26; }
     const streakRow = document.createElement('div');
     streakRow.className = 'cc-streak-row';
     streakRow.innerHTML = `
-      <div class="cc-streak-chip">
+      <div class="cc-streak-chip cc-card cc-card-flat">
         <div class="cc-streak-icon">${ICONS.leaf}</div>
         <div><div class="cc-streak-label">Sequência atual</div><div class="cc-streak-value">${currentStreak} ${currentStreak === 1 ? 'dia' : 'dias'}</div></div>
       </div>
-      <div class="cc-streak-chip">
+      <div class="cc-streak-chip cc-card cc-card-flat">
         <div class="cc-streak-icon">${ICONS.check}</div>
         <div><div class="cc-streak-label">Melhor sequência do mês</div><div class="cc-streak-value">${bestStreak} ${bestStreak === 1 ? 'dia' : 'dias'}</div></div>
       </div>
@@ -3980,7 +4656,7 @@ body { background: #efe6cd; color: #2e2b26; }
 
     const achBtnRow = document.createElement('div');
     achBtnRow.className = 'cc-achievements-btn-row';
-    achBtnRow.innerHTML = `<button class="cc-btn" id="ccAchievementsBtn">🏆 Conquistas</button>`;
+    achBtnRow.innerHTML = `<button class="cc-btn cc-btn-secondary" id="ccAchievementsBtn">🏆 Conquistas</button>`;
     mainEl.appendChild(achBtnRow);
     document.getElementById('ccAchievementsBtn').addEventListener('click', openAchievementsPanel);
 
@@ -4082,8 +4758,8 @@ body { background: #efe6cd; color: #2e2b26; }
         <span class="cc-cal-day-view-badge ${saved ? 'saved' : 'pending'}">${saved ? 'Checklist enviado ✓' : 'Em andamento'}</span>
       </div>
       <div class="cc-head-actions">
-        <button class="cc-btn" id="ccResetDayBtn" ${dayLocked ? 'disabled' : ''}>Reiniciar respostas do dia</button>
-        <button class="cc-btn cc-primary" id="ccSaveSendBtn" ${previewOnly ? 'disabled' : ''}>Salvar e enviar por e-mail</button>
+        <button class="cc-btn cc-btn-secondary" id="ccResetDayBtn" ${dayLocked ? 'disabled' : ''}>Reiniciar respostas do dia</button>
+        <button class="cc-btn cc-btn-primary cc-primary" id="ccSaveSendBtn" ${previewOnly ? 'disabled' : ''}>Salvar e enviar por e-mail</button>
       </div>
     `;
     mainEl.appendChild(head);
@@ -4102,7 +4778,7 @@ body { background: #efe6cd; color: #2e2b26; }
       const { done, total } = roomProgressCount(cabin, date, room);
       const complete = total > 0 && done === total;
       const card = document.createElement('div');
-      card.className = 'cc-room-card';
+      card.className = 'cc-room-card cc-card cc-card-interactive';
       card.innerHTML = `
         ${complete ? `<div class="cc-room-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#fdf9ec" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>` : ''}
         ${adminMode ? `<button class="cc-room-card-del" data-del-room="${room.id}" title="Excluir área">✕</button>` : ''}
@@ -4210,7 +4886,7 @@ body { background: #efe6cd; color: #2e2b26; }
     const roomTimeLabel = formatDuration(roomTimerSeconds(cabin, date, room.id));
 
     const head = document.createElement('div');
-    head.className = 'cc-room-view-head';
+    head.className = 'cc-room-view-head cc-checklist-room-head';
     const roomJustCompletedNow = justCompletedRoomId === room.id;
     if (roomJustCompletedNow) justCompletedRoomId = null; // consome a flag: só anima uma vez
     head.innerHTML = `
@@ -4220,12 +4896,12 @@ body { background: #efe6cd; color: #2e2b26; }
     mainEl.appendChild(head);
 
     const progWrap = document.createElement('div');
-    progWrap.className = 'cc-progress-wrap';
+    progWrap.className = 'cc-progress-wrap cc-checklist-progress';
     progWrap.innerHTML = `<div class="cc-progress-track"><div class="cc-progress-fill" style="width:${roomPct}%"></div></div>`;
     mainEl.appendChild(progWrap);
 
     const roomEl = document.createElement('div');
-    roomEl.className = 'cc-room' + (dayLocked ? ' cc-locked' : '');
+    roomEl.className = 'cc-room cc-checklist-room' + (dayLocked ? ' cc-locked' : '');
     roomEl.innerHTML = `
       <div class="cc-items" id="ccItemsList"></div>
       ${adminMode ? `<div class="cc-add-item-row">
@@ -4244,13 +4920,14 @@ body { background: #efe6cd; color: #2e2b26; }
       const photoCount = (comp.damagePhotos || []).length;
       const justCompleted = item.id === itemJustCompletedId && !reducedMotion;
       const row = document.createElement('div');
-      row.className = 'cc-item' + (comp.damaged ? ' has-damage' : '') + (justCompleted ? ' cc-item-flash' : '');
+      const stateCls = comp.done ? 'cc-checklist-item-completed' : 'cc-checklist-item-pending';
+      row.className = 'cc-item cc-checklist-item ' + stateCls + (comp.damaged ? ' has-damage cc-checklist-item-damaged' : '') + (dayLocked ? ' cc-checklist-item-readonly' : '') + (justCompleted ? ' cc-item-flash' : '');
       row.title = comp.damaged ? comp.damageNote : '';
       row.innerHTML = `
-        <div class="cc-check ${comp.done ? 'done' : ''}${justCompleted ? ' cc-check-pop' : ''}" data-toggle="${item.id}"></div>
-        <span class="cc-item-label ${comp.done ? 'done' : ''}" data-toggle="${item.id}">${escapeHtml(item.label)}</span>
-        <button class="cc-damage-btn ${comp.damaged ? 'flagged' : ''}" data-damage="${item.id}">${comp.damaged ? 'Danificado ⚠' : 'Danificado'}${photoCount ? ' 📷' + photoCount : ''}</button>
-        ${adminMode ? `<button class="cc-item-del" data-del-item="${item.id}">✕</button>` : ''}
+        <div class="cc-check cc-checklist-check ${comp.done ? 'done' : ''}${justCompleted ? ' cc-check-pop' : ''}${dayLocked ? ' cc-checklist-check-disabled' : ''}" data-toggle="${item.id}"></div>
+        <span class="cc-item-label cc-checklist-item-label ${comp.done ? 'done' : ''}" data-toggle="${item.id}">${escapeHtml(item.label)}</span>
+        <button class="cc-damage-btn cc-checklist-damage-btn ${comp.damaged ? 'flagged cc-btn-danger' : ''}" data-damage="${item.id}">${comp.damaged ? 'Danificado ⚠' : 'Danificado'}${photoCount ? ' 📷' + photoCount : ''}</button>
+        ${adminMode ? `<button class="cc-item-del cc-checklist-item-del" data-del-item="${item.id}">✕</button>` : ''}
       `;
       itemsEl.appendChild(row);
     });
