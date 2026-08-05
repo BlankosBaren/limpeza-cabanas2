@@ -1288,7 +1288,7 @@ body { background: #efe6cd; color: #2e2b26; }
   const CONFIG = {
     sistema: {
       nome: 'Diário de Limpeza das Cabanas',
-      versao: 'v28',
+      versao: 'v30',
       empresa: '',
       propriedade: '',
       marcaTitulo: 'Diário&nbsp;de Limpeza',
@@ -1348,7 +1348,7 @@ body { background: #efe6cd; color: #2e2b26; }
     backup: {
       formatVersion: 1,
       avisoTamanhoBytes: 5 * 1024 * 1024,
-      maxBytesLeitura: 150 * 1024 * 1024
+      maxBytesLeitura: 100 * 1024 * 1024
     },
     mensagens: {
       falhaCarregarDados: 'Não foi possível carregar os dados salvos neste aparelho. Os dados existentes não foram apagados — evite excluir cabanas até resolver isso e recarregar a página.',
@@ -1816,14 +1816,16 @@ body { background: #efe6cd; color: #2e2b26; }
     saveTimer = setTimeout(() => doPersist(), CONFIG.armazenamento.autosaveDelayMs);
   }
   async function doPersist() {
-    if (isRestoringBackup) return; // reforço: nada grava por cima de uma restauração em curso
+    if (isRestoringBackup) return false; // reforço: nada grava por cima de uma restauração em curso
     try {
       await storageService.setSerialized(STORAGE_KEY, JSON.stringify(state));
       setSaveIndicator('saved');
+      return true;
     } catch (e) {
       console.error('Falha ao salvar dados no IndexedDB', e);
       setSaveIndicator('error');
       showToast(CONFIG.mensagens.falhaSalvarDados, 'info', CONFIG.toasts.duracaoErroSalvarMs);
+      return false;
     }
   }
   // Força a gravação imediata (sem esperar o debounce de 150ms), usada ao
@@ -1831,7 +1833,7 @@ body { background: #efe6cd; color: #2e2b26; }
   // do fechamento.
   function flushSave() {
     clearTimeout(saveTimer);
-    doPersist();
+    return doPersist();
   }
 
   function getCabin(id) { return state.cabanas.find(c => c.id === id); }
@@ -3388,9 +3390,16 @@ body { background: #efe6cd; color: #2e2b26; }
     }
     return clone;
   }
-  function exportBackup() {
+  async function exportBackup() {
     if (!adminMode || isRestoringBackup) { if (isRestoringBackup) backupMsg(CONFIG.mensagens.backupEmAndamento, 'error'); return; }
+    const exportBtn = document.getElementById('ccBackupExportBtn');
+    if (exportBtn) { if (exportBtn.disabled) return; exportBtn.disabled = true; } // evita clique duplicado
     try {
+      // Executa imediatamente o debounce pendente e aguarda a fila real de
+      // gravação do storageService (setSerialized) terminar antes de exportar.
+      const persisted = await flushSave();
+      if (!persisted) { backupMsg(CONFIG.mensagens.backupFalhaExportar, 'error'); return; }
+      if (isRestoringBackup) { backupMsg(CONFIG.mensagens.backupEmAndamento, 'error'); return; }
       const now2 = new Date();
       const payload = { backupFormatVersion: CONFIG.backup.formatVersion, exportadoEm: now2.toISOString(), versaoApp: CONFIG.sistema.versao, state: buildExportSnapshot() };
       const json = JSON.stringify(payload);
@@ -3409,6 +3418,8 @@ body { background: #efe6cd; color: #2e2b26; }
     } catch (e) {
       console.error('Falha ao exportar backup', e);
       backupMsg(CONFIG.mensagens.backupFalhaExportar, 'error');
+    } finally {
+      if (exportBtn) exportBtn.disabled = false;
     }
   }
   const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -3514,6 +3525,11 @@ body { background: #efe6cd; color: #2e2b26; }
     let data;
     try { data = JSON.parse(raw); } catch (e) { return { ok: false, error: CONFIG.mensagens.backupJsonInvalido }; }
     if (!isPlainObj(data) || hasDangerousKey(data)) return { ok: false, error: CONFIG.mensagens.backupInvalido };
+    // Backup antigo: estado gravado diretamente na raiz (sem envelope {backupFormatVersion, state}).
+    // Reconhecido pela presença de um array `cabanas` válido na raiz; convertido para o formato normalizado.
+    if (!isPlainObj(data.state) && Array.isArray(data.cabanas)) {
+      data = { backupFormatVersion: 1, exportadoEm: null, versaoApp: 'versão antiga', state: data };
+    }
     // formato/versão
     if (typeof data.backupFormatVersion !== 'number' || !Number.isInteger(data.backupFormatVersion) || data.backupFormatVersion < 1) {
       return { ok: false, error: CONFIG.mensagens.backupInvalido };
@@ -3538,11 +3554,11 @@ body { background: #efe6cd; color: #2e2b26; }
     const st = data.state;
     const kb = fileSizeBytes / 1024;
     const tamanho = kb > 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${Math.round(kb)} KB`;
-    const dataBackup = data.exportadoEm ? new Date(data.exportadoEm).toLocaleString('pt-BR') : '—';
+    const dataBackup = data.exportadoEm ? new Date(data.exportadoEm).toLocaleString('pt-BR') : 'não informada';
     const summaryEl = document.getElementById('ccBackupSummary');
     if (summaryEl) summaryEl.innerHTML = `
       <div>Data do backup: ${escapeHtml(dataBackup)}</div>
-      <div>Versão do aplicativo: ${escapeHtml(data.versaoApp || '—')}</div>
+      <div>Versão do aplicativo: ${escapeHtml(data.versaoApp || 'versão antiga')}</div>
       <div>Cabanas: ${st.cabanas.length}</div>
       <div>Registros diários: ${countBackupLogs(st)}</div>
       <div>Fotografias: ${countBackupPhotos(st)}</div>
@@ -3566,6 +3582,7 @@ body { background: #efe6cd; color: #2e2b26; }
     if (isRestoringBackup) { backupMsg(CONFIG.mensagens.backupEmAndamento, 'error'); return; }
     if (!adminMode || !file) return;
     if (!/\.json$/i.test(file.name)) { backupMsg(CONFIG.mensagens.backupInvalido, 'error'); return; }
+    if (file.size > CONFIG.backup.maxBytesLeitura) { backupMsg(CONFIG.mensagens.backupTamanhoInvalido, 'error'); return; } // 2ª checagem (texto lido) mantida em validateBackupPayload
     const reader = new FileReader();
     reader.onload = () => {
       const result = validateBackupPayload(String(reader.result || ''));
