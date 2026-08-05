@@ -3,7 +3,7 @@
 // backups, PDFs ou fotos - esses fluxos não passam pelo Service Worker
 // de forma alguma (downloads, blob: e data: não são interceptados).
 
-const CACHE_NAME = 'limpeza-cabanas-v26';
+const CACHE_NAME = 'limpeza-cabanas-v28';
 
 const LOCAL_FILES = [
   './',

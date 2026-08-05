@@ -533,10 +533,20 @@ body { background: #efe6cd; color: #2e2b26; }
   .cc-add-cabin:hover { border-color: #d9a83f; background: rgba(217,168,63,0.12); }
   .cc-sound-toggle { color: #2e2b26; border-color: rgba(46,43,38,0.3); }
   .cc-sound-toggle:hover { border-color: #d9a83f; background: rgba(217,168,63,0.12); }
-  .cc-admin-btn { color: #2e2b26; border-color: rgba(46,43,38,0.3); }
-  .cc-admin-btn:hover { border-color: #d9a83f; background: rgba(217,168,63,0.12); }
+  .cc-admin-btn {
+    background: #fffbf1;
+    color: #234030;
+    border: 2px solid #3f6a4c;
+    opacity: 1;
+    font-weight: 700;
+  }
+  .cc-admin-btn:hover,
+  .cc-admin-btn:active { background: #eaf2ea; }
+  .cc-admin-btn:disabled { opacity: 0.55; }
   .cc-admin-btn.cc-admin-active { background: #d9a83f; color: #2e2b26; border-color: #d9a83f; }
 }
+
+
 
 /* ---- Área mínima de toque de 44px no celular (Sprint V25) ---- */
 @media (max-width: 640px) {
@@ -824,6 +834,28 @@ body { background: #efe6cd; color: #2e2b26; }
 }
 .cc-btn.cc-primary:hover { filter: brightness(1.06); box-shadow: 0 3px 0 #16281c; transform: translateY(-1px); }
 .cc-btn.cc-primary:active { box-shadow: 0 0 0 #16281c; transform: translateY(3px); }
+/* ---- Sprint V27: contraste reforçado nos botões de confirmação ---- */
+.cc-btn.cc-primary {
+  background: #234030;
+  color: #ffffff;
+  border: 2px solid #172b1c;
+  font-weight: 700;
+  box-shadow: 0 3px 0 #172b1c;
+  opacity: 1;
+}
+.cc-btn.cc-primary:hover { background: #2b4d3a; }
+.cc-btn.cc-primary:disabled,
+.cc-btn.cc-primary[disabled] {
+  background: #d8d5cc;
+  color: #5f5b52;
+  border: 1px solid #aaa69c;
+  opacity: 1;
+  box-shadow: none;
+  font-weight: 600;
+  cursor: not-allowed;
+}
+#ccPasswordConfirmBtn { font-weight: 700; }
+#ccPasswordConfirmBtn:disabled { font-weight: 600; }
 .cc-btn.cc-danger { border-color: rgba(193,96,47,0.5); color: var(--rust); }
 .cc-btn.cc-danger:hover { background: var(--rust-soft); border-color: var(--rust); }
 .cc-btn:disabled { box-shadow: none; transform: none; }
@@ -1026,6 +1058,62 @@ body { background: #efe6cd; color: #2e2b26; }
 .cc-ach-card-status.locked-status { background: var(--line-soft); color: var(--ink); }
 .cc-ach-card-date { font-size: 10.5px; opacity: 0.55; margin-top: 4px; font-family: 'IBM Plex Mono', monospace; }
 .cc-ach-summary { font-size: 13px; opacity: 0.75; margin-bottom: 14px; }
+
+/* V28 — CONTRASTE ADMINISTRATIVO MOBILE */
+@media (max-width: 640px) {
+  .cc-sidebar .cc-admin-btn {
+    background: #fffbf1;
+    color: #234030;
+    border: 2px solid #3f6a4c;
+    opacity: 1;
+    font-weight: 700;
+    min-height: 46px;
+    width: 100%;
+    padding: 11px 14px;
+    text-align: center;
+    justify-content: center;
+    box-shadow: 0 2px 0 rgba(35,64,48,0.18);
+  }
+
+  .cc-sidebar .cc-admin-btn:hover,
+  .cc-sidebar .cc-admin-btn:active {
+    background: #eaf2ea;
+    color: #234030;
+    border-color: #234030;
+  }
+
+  .cc-sidebar .cc-admin-btn:disabled {
+    background: #ece9df;
+    color: #6b675e;
+    border-color: #aaa69c;
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  .cc-sidebar .cc-admin-btn.cc-admin-active {
+    background: #d9a83f;
+    color: #2e2b26;
+    border-color: #b88725;
+  }
+}
+
+/* V28 — BOTÃO CONFIRMAR SENHA */
+#ccPasswordConfirmBtn:disabled {
+  background: #d8d5cc;
+  color: #5f5b52;
+  border: 1px solid #aaa69c;
+  opacity: 1;
+  box-shadow: none;
+}
+
+#ccPasswordConfirmBtn:not(:disabled) {
+  background: #234030;
+  color: #ffffff;
+  border: 2px solid #172b1c;
+  opacity: 1;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(35,64,48,0.25);
+}
 </style>
 </head>
 <body>
@@ -1200,7 +1288,7 @@ body { background: #efe6cd; color: #2e2b26; }
   const CONFIG = {
     sistema: {
       nome: 'Diário de Limpeza das Cabanas',
-      versao: 'v26',
+      versao: 'v28',
       empresa: '',
       propriedade: '',
       marcaTitulo: 'Diário&nbsp;de Limpeza',
@@ -1265,7 +1353,7 @@ body { background: #efe6cd; color: #2e2b26; }
     mensagens: {
       falhaCarregarDados: 'Não foi possível carregar os dados salvos neste aparelho. Os dados existentes não foram apagados — evite excluir cabanas até resolver isso e recarregar a página.',
       falhaSalvarDados: 'Não foi possível salvar as alterações. Não feche esta tela e tente novamente.',
-      emailFaltando: 'Preencha o e-mail de envio na tela do calendario antes de salvar.',
+      emailFaltando: 'Configure o e-mail padrão no modo administrativo.',
       pdfCarregando: 'A biblioteca de PDF ainda esta carregando. Tente novamente em instantes.',
       marcoPrimeiroDia: 'Primeiro dia concluído! Continue assim.',
       marco25: '25% da meta mensal alcançados!',
@@ -1630,6 +1718,10 @@ body { background: #efe6cd; color: #2e2b26; }
     ].map(r => ({ id: r.id, name: r.name, items: r.items.map(label => ({ id: uid(), label })) }));
   }
   function defaultCabin(name) { return { id: uid(), name, email: '', rooms: defaultRoomsTemplate(), logs: {} }; }
+  // Validação básica de formato de e-mail (usada pelo e-mail padrão dos PDFs).
+  function isValidEmailFormat(v) { return typeof v === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  // E-mail padrão usado por todas as cabanas para os PDFs/envios (centralizado).
+  function getReportEmail() { return (state.preferences && typeof state.preferences.reportEmail === 'string') ? state.preferences.reportEmail : ''; }
   // ===== MÓDULO: STATE (modelo de dados + carregamento/persistência) =====
   function defaultState() { return { cabanas: [defaultCabin(CONFIG.cabanasPadrao.nomes[0]), defaultCabin(CONFIG.cabanasPadrao.nomes[1])], preferences: { soundEnabled: true }, operationalDays: {}, monthlyMilestones: {}, achievements: {} }; }
 
@@ -1673,6 +1765,15 @@ body { background: #efe6cd; color: #2e2b26; }
     freezeOrphanRoomTimers(st);
     if (!st.preferences || typeof st.preferences !== 'object') st.preferences = {};
     if (typeof st.preferences.soundEnabled !== 'boolean') st.preferences.soundEnabled = true;
+    if (typeof st.preferences.reportEmail !== 'string') {
+      // Dados antigos: aproveita o primeiro e-mail válido já salvo em alguma
+      // cabana como valor inicial do e-mail padrão. Não apaga os campos antigos.
+      let migratedEmail = '';
+      for (const c of st.cabanas) {
+        if (typeof c.email === 'string' && isValidEmailFormat(c.email.trim())) { migratedEmail = c.email.trim(); break; }
+      }
+      st.preferences.reportEmail = migratedEmail;
+    }
     if (!st.operationalDays || typeof st.operationalDays !== 'object') st.operationalDays = {};
     if (!st.monthlyMilestones || typeof st.monthlyMilestones !== 'object') st.monthlyMilestones = {};
     st.achievements = sanitizeAchievements(st.achievements);
@@ -2359,16 +2460,28 @@ body { background: #efe6cd; color: #2e2b26; }
   const passwordOverlay = document.getElementById('ccPasswordOverlay');
   const passwordInput = document.getElementById('ccPasswordInput');
   const passwordError = document.getElementById('ccPasswordError');
+  const passwordConfirmBtn = document.getElementById('ccPasswordConfirmBtn');
+  // Habilita o botão Confirmar somente quando há texto digitado no campo.
+  function updatePasswordConfirmState() {
+    passwordConfirmBtn.disabled = passwordInput.value.trim().length === 0;
+  }
   // ===== MÓDULO: SENHA MASTER (modal de proteção) =====
   function requireMasterPassword(promptText, callback) {
     passwordCallback = callback;
     document.getElementById('ccPasswordPromptText').textContent = promptText;
     passwordInput.value = '';
     passwordError.style.display = 'none';
+    updatePasswordConfirmState();
     passwordOverlay.classList.remove('hidden');
     setTimeout(() => passwordInput.focus(), 30);
   }
-  function closePasswordModal() { passwordOverlay.classList.add('hidden'); passwordCallback = null; }
+  function closePasswordModal() {
+    passwordInput.value = '';
+    passwordError.style.display = 'none';
+    updatePasswordConfirmState();
+    passwordOverlay.classList.add('hidden');
+    passwordCallback = null;
+  }
   function confirmPassword() {
     if (passwordInput.value === MASTER_PASSWORD) {
       const cb = passwordCallback;
@@ -2376,9 +2489,18 @@ body { background: #efe6cd; color: #2e2b26; }
       if (cb) cb();
     } else { passwordError.style.display = 'block'; }
   }
-  document.getElementById('ccPasswordConfirmBtn').addEventListener('click', confirmPassword);
+  passwordConfirmBtn.addEventListener('click', confirmPassword);
   document.getElementById('ccPasswordCancelBtn').addEventListener('click', closePasswordModal);
-  passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') confirmPassword(); });
+  passwordInput.addEventListener('input', updatePasswordConfirmState);
+  passwordInput.addEventListener('keydown', event => {
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    if (passwordInput.value.trim().length === 0) {
+      updatePasswordConfirmState();
+      return;
+    }
+    confirmPassword();
+  });
   passwordOverlay.addEventListener('click', e => { if (e.target === passwordOverlay) closePasswordModal(); });
 
   const dayCompleteOverlay = document.getElementById('ccDayCompleteOverlay');
@@ -3565,11 +3687,18 @@ body { background: #efe6cd; color: #2e2b26; }
     }
   }
 
-  // Cabanas visíveis para a funcionária (somente programadas para hoje) ou
-  // para o administrador (todas, para poder editar/programar qualquer uma).
+  // Data atualmente aberta para a funcionária: hoje, ou amanhã quando ela
+  // estiver dentro da visualização somente leitura do planejamento de amanhã.
+  function currentViewDateForUser() {
+    if (!adminMode && selectedDate && isTomorrowPreview(selectedDate)) return selectedDate;
+    return todayStr();
+  }
+  // Cabanas visíveis para a funcionária (somente programadas para a data
+  // atualmente aberta — hoje ou amanhã) ou para o administrador (todas,
+  // para poder editar/programar qualquer uma).
   function visibleCabinsForUser() {
     if (adminMode) return state.cabanas;
-    const ids = new Set(scheduledCabinIdsFor(todayStr()));
+    const ids = new Set(scheduledCabinIdsFor(currentViewDateForUser()));
     return state.cabanas.filter(c => ids.has(c.id));
   }
   // Garante que selectedId nunca aponte para uma cabana oculta. Se restar
@@ -3591,8 +3720,9 @@ body { background: #efe6cd; color: #2e2b26; }
   // ===== MÓDULO: RENDER (sidebar, tela principal, cabanas/cômodos) =====
   function renderSidebar() {
     cabinListEl.innerHTML = '';
+    const viewDate = currentViewDateForUser();
     visibleCabinsForUser().forEach(cabin => {
-      const pct = dayProgress(cabin, todayStr());
+      const pct = dayProgress(cabin, viewDate);
       const tab = document.createElement('div');
       tab.className = 'cc-cabin-tab' + (cabin.id === selectedId ? ' active' : '');
       tab.innerHTML = `
@@ -3619,9 +3749,12 @@ body { background: #efe6cd; color: #2e2b26; }
     renderAdminControls();
     renderAdminPanel();
     mainEl.innerHTML = '';
-    if (!adminMode && state.cabanas.length > 0 && visibleCabinsForUser().length === 0 && effectiveScheduleStatus(todayStr()) === 'trabalho') {
+    const viewDateForEmpty = currentViewDateForUser();
+    if (!adminMode && state.cabanas.length > 0 && visibleCabinsForUser().length === 0 && effectiveScheduleStatus(viewDateForEmpty) === 'trabalho') {
       pauseActiveTimerIfLeaving(null);
-      mainEl.innerHTML = '<div class="cc-empty">Nenhuma cabana está programada para hoje.<br>Peça ao administrador para programar as cabanas em "Gerenciar escala".</div>';
+      mainEl.innerHTML = (viewDateForEmpty === todayStr())
+        ? '<div class="cc-empty">Nenhuma cabana está programada para hoje.<br>Peça ao administrador para programar as cabanas em "Gerenciar escala".</div>'
+        : '<div class="cc-empty">Nenhuma cabana programada para esta data.</div>';
       return;
     }
     const cabin = getCabin(selectedId);
@@ -3653,11 +3786,12 @@ body { background: #efe6cd; color: #2e2b26; }
     head.innerHTML = `
       <div class="cc-head-left">
         <input class="cc-cabin-name-input cc-display" id="ccNameInput" value="${escapeHtml(cabin.name)}" ${adminMode ? '' : 'readonly'} />
-        <div class="cc-head-meta cc-mono">${cabin.rooms.length} áreas · ${allItems(cabin).length} itens no checklist</div>
+        ${adminMode ? `<div class="cc-head-meta cc-mono">${cabin.rooms.length} áreas · ${allItems(cabin).length} itens no checklist</div>` : ''}
+        ${adminMode ? `
         <div class="cc-email-row">
-          <label for="ccEmailInput">Enviar PDF para</label>
-          <input type="email" class="cc-email-input" id="ccEmailInput" placeholder="email@exemplo.com" value="${escapeHtml(cabin.email)}" ${adminMode ? '' : 'readonly'} />
-        </div>
+          <label for="ccReportEmailInput">E-mail padrão dos PDFs</label>
+          <input type="email" class="cc-email-input" id="ccReportEmailInput" placeholder="email@exemplo.com" value="${escapeHtml(getReportEmail())}" />
+        </div>` : ''}
       </div>
       <div class="cc-head-actions">
         ${adminMode ? '<button class="cc-btn cc-danger" id="ccDeleteCabinBtn">Excluir cabana</button>' : ''}
@@ -3846,10 +3980,29 @@ body { background: #efe6cd; color: #2e2b26; }
       if (!adminMode) { render(); return; }
       cabin.name = e.target.value.trim() || cabin.name; save(); renderSidebar();
     });
-    document.getElementById('ccEmailInput').addEventListener('change', e => {
-      if (!adminMode) { render(); return; }
-      cabin.email = e.target.value.trim(); save();
-    });
+    const reportEmailInput = document.getElementById('ccReportEmailInput');
+    if (reportEmailInput) {
+      reportEmailInput.addEventListener('change', e => {
+        if (!adminMode) { render(); return; }
+        const val = e.target.value.trim();
+        if (val === '') {
+          // Permitir vazio somente mediante ação administrativa consciente
+          // (campo apagado e confirmado explicitamente pelo admin).
+          state.preferences.reportEmail = '';
+          save();
+          showToast('E-mail padrão atualizado.', 'info', CONFIG.toasts.duracaoInfoMs);
+          return;
+        }
+        if (!isValidEmailFormat(val)) {
+          showToast('E-mail inválido. O e-mail anterior foi mantido.', 'info', CONFIG.toasts.duracaoInfoMs);
+          e.target.value = getReportEmail();
+          return;
+        }
+        state.preferences.reportEmail = val;
+        save();
+        showToast('E-mail padrão atualizado.', 'info', CONFIG.toasts.duracaoInfoMs);
+      });
+    }
     const deleteCabinBtn = document.getElementById('ccDeleteCabinBtn');
     if (deleteCabinBtn) deleteCabinBtn.addEventListener('click', () => {
       if (!adminMode) return;
@@ -4362,10 +4515,6 @@ body { background: #efe6cd; color: #2e2b26; }
   }
 
   function saveAndSend(cabin, date) {
-    if (!cabin.email) {
-      showToast(CONFIG.mensagens.emailFaltando, 'info', CONFIG.toasts.duracaoInfoMs);
-      return;
-    }
     if (!window.jspdf) {
       showToast(CONFIG.mensagens.pdfCarregando, 'info', CONFIG.toasts.duracaoPdfCarregandoMs);
       return;
@@ -4374,16 +4523,23 @@ body { background: #efe6cd; color: #2e2b26; }
     const filename = `checklist-${cabin.name.replace(/\s+/g,'-').toLowerCase()}-${date}.pdf`;
     doc.save(filename);
 
-    const subject = `Checklist de limpeza - ${cabin.name} - ${date}`;
-    const body = `Ola,\n\nSegue o checklist de limpeza referente ao dia ${date} da ${cabin.name}.\nO arquivo PDF foi baixado neste dispositivo - anexe-o a este e-mail antes de enviar.\n\nGerado automaticamente pelo Diario de Limpeza.`;
-    const a = document.createElement('a');
-    a.href = `mailto:${encodeURIComponent(cabin.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    document.body.appendChild(a); a.click(); a.remove();
+    const reportEmail = getReportEmail();
+    if (reportEmail) {
+      const subject = `Checklist de limpeza - ${cabin.name} - ${date}`;
+      const body = `Ola,\n\nSegue o checklist de limpeza referente ao dia ${date} da ${cabin.name}.\nO arquivo PDF foi baixado neste dispositivo - anexe-o a este e-mail antes de enviar.\n\nGerado automaticamente pelo Diario de Limpeza.`;
+      const a = document.createElement('a');
+      a.href = `mailto:${encodeURIComponent(reportEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      document.body.appendChild(a); a.click(); a.remove();
+    }
 
     const log = ensureLog(cabin, date);
     log.saved = true; log.savedAt = Date.now();
     save(); render();
-    showToast(`PDF baixado e rascunho de e-mail aberto para <b>${escapeHtml(cabin.email)}</b>. Anexe o arquivo baixado e envie.`, 'info', CONFIG.toasts.duracaoEmailMs);
+    if (reportEmail) {
+      showToast(`PDF baixado e rascunho de e-mail aberto para <b>${escapeHtml(reportEmail)}</b>. Anexe o arquivo baixado e envie.`, 'info', CONFIG.toasts.duracaoEmailMs);
+    } else {
+      showToast(CONFIG.mensagens.emailFaltando, 'info', CONFIG.toasts.duracaoInfoMs);
+    }
   }
 
   // ===== MÓDULO: PWA - registro do Service Worker (não interfere nos dados) =====
